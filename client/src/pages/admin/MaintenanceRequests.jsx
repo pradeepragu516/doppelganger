@@ -26,7 +26,7 @@ const MaintenanceRequests = () => {
         <Sidebar />
         <main className="main-content">
           <h1 className="page-title">Maintenance Request Queue</h1>
-          <RequestTable requests={requests} showSensorData={true} />
+          <RequestTable requests={visibleRequests} showSensorData={true} />
         </main>
       </div>
     </div>

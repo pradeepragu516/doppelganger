@@ -531,8 +531,17 @@ export const MachineProvider = ({ children }) => {
   };
 
   const removeMachine = (machineId) => {
-    setMachines(prev => prev.filter(m => m.id !== machineId));
-    addSystemEvent('machine', `Machine ${machineId} removed from system`, 'info');
+    (async () => {
+      try {
+        await apiClient.delete(`/machines/${machineId}`);
+        setMachines(prev => prev.filter(m => m.id !== machineId));
+        addSystemEvent('machine', `Machine ${machineId} removed from system`, 'info');
+      } catch (e) {
+        // if delete fails, fallback to local remove but log the event
+        setMachines(prev => prev.filter(m => m.id !== machineId));
+        addSystemEvent('machine', `Machine ${machineId} removed locally (delete failed)`, 'info');
+      }
+    })();
   };
 
   return (

@@ -1,4 +1,8 @@
-const API_BASE_URL = "https://doppelganger-backend-1.onrender.com";
+// Use local backend in development and include the `/api` prefix used by the server
+const API_BASE_URL = (typeof window !== 'undefined' && window.location && window.location.hostname && window.location.hostname.includes('localhost'))
+  ? 'http://localhost:5000/api'
+  : 'https://doppelganger-backend-1.onrender.com/api';
+
 export default API_BASE_URL;
 
 const getAuthHeaders = () => {

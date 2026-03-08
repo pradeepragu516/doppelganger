@@ -39,7 +39,7 @@ const RequestTable = ({ requests, showActions = false, showSensorData = false, o
               )}
               <td><span className={`priority-badge ${getPriorityClass(req.priority)}`}>{req.priority}</span></td>
               <td><span className={`status-badge ${getStatusClass(req.status)}`}>{req.status}</span></td>
-              <td>{req.assignedTo}</td>
+              <td>{req.assignedTo || req.assignedToName || (req.assignedToId ? 'Assigned' : 'Unassigned')}</td>
               {showActions && (
                 <td>
                   <button className="btn-action" onClick={() => onUpdate(req.id)}>Update</button>
